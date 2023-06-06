@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ApiPolizas.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -20,8 +21,14 @@ namespace ApiPolizas.Controllers
 
 
         [HttpPost]
-        public string GetToken()
+        public string GetToken(User user)
         {
+
+            if (user.Contrasena !="Simpson" && user.Usuario != "Homero" )
+            {
+                return "usuario incorrecto";
+
+            }
             var token = GenerateToken();
             return token;
         }
